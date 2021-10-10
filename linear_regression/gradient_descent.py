@@ -5,17 +5,16 @@ import numpy as np
 def start():
     print("start")
     x_train = np.array([1, 2, 3.3, 4.2, 4.5, 6, 7, 8, 9])
-    y_train = np.array([2.1, 3, 4, 5.5, 6, 7.5, 8, 8.8, 10.1])
+    y_train = np.array([2.1, 3, 4, 5.5, 6, 7.5, 8.1, 8.8, 10.1])
     print(x_train)
     print(y_train)
 
     w0 = np.random.normal()
     w1 = np.random.normal()
-    err = 1
-    print(w0, w1, err)
+    print("init setting: (%f, %f)" % (w0, w1))
 
     count = 10000
-    rate = 0.0001
+    rate = 0.001
     for i in range(count):
         for x, y in zip(x_train, y_train):
             w0 = w0 - rate * (h(w0, w1, x) - y) * 1
@@ -25,7 +24,9 @@ def start():
             err += (y - h(w0, w1, x)) ** 2
         m = len(x_train)
         err = float(err / (2 * m))
-        print("(%f, %f)\terr: %f" % (w0, w1, err))
+        print("%d:\t(%f, %f)\terr: %f" % (i, w0, w1, err))
+        if err < 0.01:
+            break
 
     print(w0, w1)
     draw(x_train, y_train, w0, w1)

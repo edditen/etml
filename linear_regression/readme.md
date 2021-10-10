@@ -9,3 +9,7 @@
 - how to step into next position:
 
 ![img.png](imgs/003.png)
+
+- result
+
+![img.png](imgs/004.png)
