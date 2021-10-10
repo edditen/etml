@@ -1,10 +1,11 @@
+import matplotlib.pyplot as plt
 import numpy as np
 
 
 def start():
     print("start")
-    x_train = np.array([1, 2, 3, 4, 5, 6, 7, 8, 9])
-    y_train = np.array([2.1, 3, 4, 5.5, 6, 7, 8, 8.8, 10.1])
+    x_train = np.array([1, 2, 3.3, 4.2, 4.5, 6, 7, 8, 9])
+    y_train = np.array([2.1, 3, 4, 5.5, 6, 7.5, 8, 8.8, 10.1])
     print(x_train)
     print(y_train)
 
@@ -14,7 +15,7 @@ def start():
     print(w0, w1, err)
 
     count = 10000
-    rate = 0.001
+    rate = 0.0001
     for i in range(count):
         for x, y in zip(x_train, y_train):
             w0 = w0 - rate * (h(w0, w1, x) - y) * 1
@@ -27,10 +28,28 @@ def start():
         print("(%f, %f)\terr: %f" % (w0, w1, err))
 
     print(w0, w1)
+    draw(x_train, y_train, w0, w1)
 
 
 def h(w0, w1, x):
     return w0 + w1 * x
+
+
+def draw(x_train, y_train, w0, w1):
+    # draw
+    plt.scatter(x_train, y_train, s=10, c='blue')
+    # Set chart title.
+    plt.title("Linear regression")
+    # Set x, y label text.
+    plt.xlabel("y = %f + %fx" % (w0, w1))
+    plt.ylabel("y")
+
+    x_number_list = list(range(0, 12))
+    y_number_list = [h(w0, w1, x) for x in x_number_list]
+    plt.plot(x_number_list, y_number_list, linewidth=1, c='green')
+    plt.axis([0, 10, 0, 15])
+
+    plt.show()
 
 
 if __name__ == '__main__':
